@@ -32,6 +32,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'rb-fsevent' if `uname` =~ /Darwin/
   gem 'terminal-notifier-guard'
+  gem 'factory_girl_rails'
 end
 
 group :test do

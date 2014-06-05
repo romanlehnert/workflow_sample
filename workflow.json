@@ -1,0 +1,28 @@
+
+{
+  name: "default workflow",
+
+  states: [
+    { 
+      name: "initialized"
+      transitions: [
+        { name: "pick_up", 
+          target_state: "in_progress", 
+          post_hooks: [
+            {service: "mailer", params: {template: "bla", dynmaic_receiver: "dealer_user" } },
+            {service: "mailer", params: {template: "bla", dynmaic_receiver: "customer" } },
+            {service: "mailer", params: {template: "bla", dynmaic_receiver: "creator" } },
+            {service: "mailer", params: {template: "bla", dynmaic_receiver: "all_reailter_employees" } },
+            {service: "mailer", params: {template: "bla", static_receiver: "thomas@bla.de" } },
+          ]
+        }
+      ],
+    }, 
+    {
+      name: "in_progress"
+      transitions:  [
+        { name: "give_back", target_state: "initialized" }
+      ]
+    }, 
+  ]
+}

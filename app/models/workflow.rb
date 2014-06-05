@@ -9,4 +9,5 @@ class Workflow < ActiveRecord::Base
     raise "NoInitialState" if !has_initial_state?
     states.where(initial: true).first
   end
+
 end

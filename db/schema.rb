@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504151346) do
+ActiveRecord::Schema.define(version: 20140505120302) do
 
   create_table "contracts", force: true do |t|
     t.integer  "user_id"
@@ -20,6 +20,22 @@ ActiveRecord::Schema.define(version: 20140504151346) do
   end
 
   add_index "contracts", ["user_id"], name: "index_contracts_on_user_id"
+
+  create_table "hooks", force: true do |t|
+    t.string   "occurance"
+    t.string   "service"
+    t.string   "params"
+    t.integer  "transition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "post_hooks", force: true do |t|
+    t.string   "service"
+    t.string   "params"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "states", force: true do |t|
     t.string   "name"
@@ -32,8 +48,8 @@ ActiveRecord::Schema.define(version: 20140504151346) do
   add_index "states", ["workflow_id"], name: "index_states_on_workflow_id"
 
   create_table "transitions", force: true do |t|
-    t.integer  "start_state_id"
-    t.integer  "end_state_id"
+    t.integer  "origin_id"
+    t.integer  "target_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

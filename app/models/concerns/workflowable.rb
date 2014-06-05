@@ -3,9 +3,10 @@ module Workflowable
   extend ActiveSupport::Concern
 
   included do
+    has_one :workflow_membership, as: :workflow_membershippable
+
     has_one :workflow, through: :workflow_membership
     has_one :state, through: :workflow_membership
-    has_one :workflow_membership, as: :workflow_membershippable
 
     validates :state, presence: true
     validates :workflow, presence: true
@@ -25,7 +26,20 @@ module Workflowable
     self.state = workflow.initial_state
   end
 
+  def possible_transitions
+    raise "NoStateError" if !state
+    state.transitions
+  end
+
+  def execute_transition
+
+  end
+
   module ClassMethods 
-  
+    def pickup!
+    end
+
+    def finish!
+    end
   end
 end
